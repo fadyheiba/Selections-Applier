@@ -1,6 +1,5 @@
 define(['jquery', 'qlik', 'css!./FEI-SelectionsApplier.css', './properties'], function ($, qlik, cssContent, properties) {
     return {
-        console.log(properties);
         definition: properties,
         paint: function ($element, layout, jquery,properties) {
             var app = qlik.currApp();

@@ -18,6 +18,14 @@ var addOnActivateButtonEvent = function ($element,layout,app) {
         console.log(layout.field);
         var selectionsInput = document.getElementById("selectionsTextboxArea-"+layout.qInfo.qId).value.split('\n');
         selectionsInput = selectionsInput.filter(function(n){ return n != "" });
+        // remove any duplicates to selections array
+        function uniq(a) {
+            var seen = {};
+            return a.filter(function(item) {
+                return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+            });
+        }
+        selectionsInput = uniq(selectionsInput);
         selections = layout.isNumeric ? selectionsInput.map(function(item){return parseFloat(item);}) : selectionsInput;
         console.log('Selections to be applied are:', selections);
         app.field(layout.field).selectValues(selections, true,true);

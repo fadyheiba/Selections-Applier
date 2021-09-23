@@ -22,23 +22,18 @@ define(['jquery','underscore','qlik','ng!$q'], function ($, _, qlik, $q) {
                 items: {                
                     list: {
                         type: "string",
-                        component: "dropdown",
                         label: "Field",
                         ref: "field",
-                        options: function () {
-                            return getFieldList().then(function (items) {
-                                return items;
-                            });
-                        },
-                        defaultValue: ''
+                        defaultValue: '',
+                        expression:  "optional"
                     },
-                    isNumeric: {
-                        type: "boolean",
-                        component: "checkbox",
-                        label: "Numeric?",
-                        ref: "isNumeric",
-                        defaultValue: false
-                    }
+                    // isNumeric: {
+                    //     type: "string",
+                    //     label: "Numeric?",
+                    //     ref: "isNumeric",
+                    //     defaultValue: 0,
+                    //     expression:  "optional"
+                    // }
                 }
             }
         }

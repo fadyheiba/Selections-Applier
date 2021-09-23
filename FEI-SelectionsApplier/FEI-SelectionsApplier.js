@@ -15,7 +15,6 @@ define(['jquery', 'qlik', 'css!./FEI-SelectionsApplier.css', './properties'], fu
 //Helper funciton for adding on a "qv-activate" event of button/link
 var addOnActivateButtonEvent = function ($element,layout,app) {
     $("#applySelections-"+layout.qInfo.qId).on('qv-activate', function () {
-        console.log(0);
         var selectionsInput = document.getElementById("selectionsTextboxArea-"+layout.qInfo.qId).value.split('\n');
         selectionsInput = selectionsInput.filter(function(n){ return n != "" });
         // remove any duplicates to selections array
@@ -26,7 +25,8 @@ var addOnActivateButtonEvent = function ($element,layout,app) {
             });
         }
         selectionsInput = uniq(selectionsInput);
-        selections = layout.isNumeric ? selectionsInput.map(function(item){return parseFloat(item);}) : selectionsInput;
+        // selections = layout.isNumeric ? selectionsInput.map(function(item){return parseFloat(item);}) : selectionsInput;
+        selections = selectionsInput.map(item => isFinite(item) ? parseFloat(item) : item)
         console.log('Selections to be applied are:', selections);
         app.field(layout.field).selectValues(selections, true,true);
     });
